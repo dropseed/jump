@@ -14,7 +14,7 @@
     "repos"
   ],
   "author": "Dropseed, LLC",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "devDependencies": {
     "electron": "~1.6.2"
   }
