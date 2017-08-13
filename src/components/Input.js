@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import Autocomplete from 'react-autocomplete'
+import Repository from 'components/Repository'
 
 const Container = styled.div`
   width: 100%;
+  height: 100%;
   padding: .5rem;
+  overflow: visible;
 `
 const FormInput = styled.input`
   width: 100%;
@@ -21,12 +25,27 @@ class Input extends Component {
     this.input.focus()
   }
   render() {
-    const { value, fullName, onChangeHandler, onSubmitHandler, currentRepository } = this.props
+    const { repositories, value, fullName, onChangeHandler, onSubmitHandler, currentRepository } = this.props
 
     return (
         <Container>
           <form onSubmit={onSubmitHandler}>
-            <FormInput onChange={onChangeHandler} value={value} innerRef={(input) => { this.input = input }} type="text" placeholder="jump to a repo" />
+            <Autocomplete
+              onChange={onChangeHandler}
+              value={value}
+              ref={(input) => { this.input = input }}
+              items={repositories}
+              getItemValue={(repo) => repo.fullName}
+              renderItem={(item, isHighlighted) =>
+                <Repository {...item} isHighlighted={isHighlighted} />
+              }
+              // renderMenu={(items, value, style) =>
+              //   <Repositories data={items} />
+              // }
+              inputProps={{style: { width: '100%'}}}
+              menuStyle={{width: '100%'}}
+              // open={true}
+            />
           </form>
         </Container>
     )

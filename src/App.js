@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import opn from 'opn'
 import electron from 'electron'
 import Input from 'components/Input'
-import Repositories from 'components/Repositories'
 const constants = require('./constants')
 
 class App extends Component {
@@ -29,8 +28,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Input value={currentInputValue} onChangeHandler={this.onJumpInputChanged} onSubmitHandler={this.onJumpSubmitted} currentRepository={currentRepository} />
-        <Repositories data={visibleRepositories} />
+        <Input repositories={repositories} value={currentInputValue} onChangeHandler={this.onJumpInputChanged} onSubmitHandler={this.onJumpSubmitted} currentRepository={currentRepository} />
       </div>
     )
   }
@@ -38,7 +36,7 @@ class App extends Component {
     const value = event.target.value
     this.setState({currentInputValue: value})
     console.log("Searching for: " + value)
-    this.filterRepositories(value)
+    // this.filterRepositories(value)
   }
   onJumpSubmitted = (event) => {
     event.preventDefault()
