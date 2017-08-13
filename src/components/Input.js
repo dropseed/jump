@@ -21,7 +21,7 @@ class Input extends Component {
     this.input.focus()
   }
   render() {
-    const { value, fullName, onChangeHandler, onSubmitHandler, currentRepository } = this.props
+    const { value, full_name, onChangeHandler, onSubmitHandler, currentRepository } = this.props
 
     return (
         <Container>

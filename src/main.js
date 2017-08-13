@@ -1,6 +1,7 @@
 const electron = require('electron')
 const electronIsDev = require('electron-is-dev')
 const constants = require('./constants')
+const utils = require('./utils')
 
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
@@ -9,18 +10,15 @@ const path = require('path')
 const url = require('url')
 const os = require('os')
 
+const GitHubApi = require('github')
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 function createWindow () {
-  let userSettings
-
-  try {
-    userSettings = require(path.join(os.homedir(), '.jump.js'))
-  } catch (e) {
-    console.log(e)
-    electron.dialog.showErrorBox('No config found', 'You need a ~/.jump.js config file.')
+  const userSettings = utils.getUserSettings()
+  if (!userSettings) {
     return
   }
 
@@ -31,7 +29,7 @@ function createWindow () {
     frame: false,
     skipTaskbar: true,
     fullscreenable: false,
-    resizable: false,
+    // resizable: false,
     // show: false,
     title: 'Jump',
     // transparent: true
@@ -59,10 +57,50 @@ function createWindow () {
       createWindow()
     }
   })
+
+  return mainWindow
 }
 
 app.on('ready', () => {
-  createWindow()
+
+  // TODO use this to send results to
+  // const window = createWindow()
+
+  const github = new GitHubApi({
+    headers: {
+      "user-agent": "jump" // GitHub is happy with a unique user agent
+    },
+  })
+
+  github.authenticate({
+    type: "token",
+    token: utils.getUserSettings().config.github_access_token,
+  })
+
+  global.repos = []
+  github.repos.getAll({per_page: 100}, getRepos)
+
+  function getRepos(err, res) {
+    if (err) {
+      return false;
+    }
+
+    global.repos = global.repos.concat(res['data']);
+    // remove everything we're not using for better performance
+    global.repos = global.repos.map(r => {
+      return {'full_name': r.full_name, 'html_url': r.html_url}
+    })
+
+    if (github.hasNextPage(res)) {
+      github.getNextPage(res, getRepos)
+    } else {
+      // temporary to not load window until all results loaded
+      // neeed to send results as they come?
+      createWindow()
+    }
+  }
+
+  // createWindow()
 })
 
 // Quit when all windows are closed.

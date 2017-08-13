@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import opn from 'opn'
+import Fuse from 'fuse.js'
 import electron from 'electron'
 import Input from 'components/Input'
 import Repositories from 'components/Repositories'
@@ -10,18 +11,17 @@ class App extends Component {
     currentRepository: null,
     currentInputValue: "",
     visibleRepositories: [],
-    repositories: [
-      {
-        "id": 1,
-        "fullName": "dropseedlabs/jump",
-        "htmlUrl": "https://github.com/dropseedlabs/jump"
-      },
-      {
-        "id": 2,
-        "fullName": "flinthillsdesign/FlintHillsDesignWP",
-        "htmlUrl": "https://github.com/flinthillsdesign/FlintHillsDesignWP"
-      }
-    ],
+    repositories: [],
+  }
+  componentDidMount() {
+    const repos = electron.remote.getGlobal('repos')
+    const fuse = new Fuse(repos, {
+      keys: [
+        "full_name"
+      ]
+    })
+    this.setState({repositories: repos, fuse: fuse})
+    console.log(repos)
   }
   render() {
 
@@ -42,8 +42,8 @@ class App extends Component {
   }
   onJumpSubmitted = (event) => {
     event.preventDefault()
-    console.log("Opening " + this.state.currentRepository.fullName)
-    opn(this.state.currentRepository.htmlUrl)
+    console.log("Opening " + this.state.currentRepository.full_name)
+    opn(this.state.currentRepository.html_url)
     electron.remote.getCurrentWindow().close()
   }
   filterRepositories = (filter) => {
@@ -51,7 +51,7 @@ class App extends Component {
     let mostLikely = null
 
     if (filter) {
-      visibleRepositories = this.state.repositories.filter(el => el.fullName.toLowerCase().indexOf(filter.toLowerCase()) !== -1)
+      visibleRepositories = this.state.fuse.search(filter)
       if (visibleRepositories) {
         mostLikely = visibleRepositories[0]
       }
@@ -61,6 +61,10 @@ class App extends Component {
       electron.remote.getCurrentWindow().setSize(constants.DEFAULT_WINDOW_WIDTH, constants.EXPANDED_WINDOW_HEIGHT)
     } else {
       electron.remote.getCurrentWindow().setSize(constants.DEFAULT_WINDOW_WIDTH, constants.DEFAULT_WINDOW_HEIGHT)
+    }
+
+    if (visibleRepositories.length > 15) {
+      visibleRepositories = visibleRepositories.slice(0, 10)
     }
 
     this.setState({visibleRepositories: visibleRepositories, currentRepository: mostLikely})
