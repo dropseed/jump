@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { gql, graphql } from 'react-apollo'
 import opn from 'opn'
 import electron from 'electron'
 import Input from 'components/Input'
@@ -10,22 +11,15 @@ class App extends Component {
     currentRepository: null,
     currentInputValue: "",
     visibleRepositories: [],
-    repositories: [
-      {
-        "id": 1,
-        "fullName": "dropseedlabs/jump",
-        "htmlUrl": "https://github.com/dropseedlabs/jump"
-      },
-      {
-        "id": 2,
-        "fullName": "flinthillsdesign/FlintHillsDesignWP",
-        "htmlUrl": "https://github.com/flinthillsdesign/FlintHillsDesignWP"
-      }
-    ],
   }
   render() {
 
-    const { visibleRepositories, currentRepository, repositories, currentInputValue } = this.state
+    const { visibleRepositories, currentRepository, currentInputValue } = this.state
+    const { data } = this.props
+
+    // if (!data.loading && data.viewer) {
+    //   const repositories = this.getRepositories()
+    // }
 
     return (
       <div className="App">
@@ -33,6 +27,9 @@ class App extends Component {
         <Repositories data={visibleRepositories} />
       </div>
     )
+  }
+  getRepositories = () => {
+    return this.props.data.viewer.repositories.edges.map(edge => edge.node)
   }
   onJumpInputChanged = (event) => {
     const value = event.target.value
@@ -42,7 +39,7 @@ class App extends Component {
   }
   onJumpSubmitted = (event) => {
     event.preventDefault()
-    console.log("Opening " + this.state.currentRepository.fullName)
+    console.log("Opening " + this.state.currentRepository.nameWithOwner)
     opn(this.state.currentRepository.htmlUrl)
     electron.remote.getCurrentWindow().close()
   }
@@ -51,7 +48,7 @@ class App extends Component {
     let mostLikely = null
 
     if (filter) {
-      visibleRepositories = this.state.repositories.filter(el => el.fullName.toLowerCase().indexOf(filter.toLowerCase()) !== -1)
+      visibleRepositories = this.getRepositories().filter(el => el.nameWithOwner.toLowerCase().indexOf(filter.toLowerCase()) !== -1)
       if (visibleRepositories) {
         mostLikely = visibleRepositories[0]
       }
@@ -67,4 +64,54 @@ class App extends Component {
   }
 }
 
-export default App
+const UserRepositoriesQuery = gql`
+  query UserRepositories($cursor: String) {
+    viewer {
+      repositories(first: 100, after: $cursor) {
+        edges {
+          node {
+            id
+            nameWithOwner
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  }
+`
+
+export default graphql(UserRepositoriesQuery, {
+  // This function re-runs every time `data` changes, including after `updateQuery`,
+  // meaning our loadMoreEntries function will always have the right cursor
+  props(data) {
+    const { loading, viewer, fetchMore } = data
+    console.log(data)
+    if (!loading && viewer && viewer.repositories.pageInfo.hasNextPage) {
+      fetchMore({
+        query: UserRepositoriesQuery,
+        variables: {
+          cursor: viewer.repositories.pageInfo.endCursor,
+        },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          const newEdges = fetchMoreResult.viewer.repositories.edges;
+          const pageInfo = fetchMoreResult.viewer.repositories.pageInfo;
+          return {
+            // Put the new comments at the end of the list and update `pageInfo`
+            // so we have the new `endCursor` and `hasNextPage` values
+            viewer: {
+              repositories: {
+                edges: [...previousResult.viewer.repositories.edges, ...newEdges],
+                pageInfo,
+              }
+            }
+          }
+        },
+      })
+    }
+
+    return data
+  },
+})(App)

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 class Repository extends Component {
   render() {
-    const { fullName } = this.props
+    const { nameWithOwner } = this.props
 
     const Container = styled.div`
       font-size: 1.25rem;
@@ -14,7 +14,7 @@ class Repository extends Component {
 
     return (
         <Container>
-          {fullName}
+          {nameWithOwner}
         </Container>
     )
   }
