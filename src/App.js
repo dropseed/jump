@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import opn from 'opn'
 import Fuse from 'fuse.js'
 import electron from 'electron'
 import Input from 'components/Input'
 import Repositories from 'components/Repositories'
 const constants = require('./constants')
+const opn = electron.remote.require('opn')
 
 class App extends Component {
   state = {

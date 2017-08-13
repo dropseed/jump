@@ -32,13 +32,16 @@ function createWindow () {
     // resizable: false,
     // show: false,
     title: 'Jump',
-    // transparent: true
+    // transparent: true,
+    // webPreferences: {
+    //   webSecurity: false
+    // }
   })
 
   mainWindow.loadURL(
     electronIsDev
       ? 'http://localhost:3000' // Dev server ran by react-scripts
-      : `file://${path.join(__dirname, '/build/index.html')}` // Bundled application
+      : `file://${path.join(__dirname, '../build/index.html')}` // Bundled application
   )
 
   // Emitted when the window is closed.
