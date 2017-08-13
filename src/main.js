@@ -1,9 +1,8 @@
 const electron = require('electron')
 const electronIsDev = require('electron-is-dev')
+const constants = require('./constants')
 
-// Module to control application life.
 const app = electron.app
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
@@ -16,9 +15,14 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    frame: false
+    width: constants.DEFAULT_WINDOW_WIDTH,
+    height: constants.DEFAULT_WINDOW_HEIGHT,
+    frame: false,
+    skipTaskbar: true,
+    fullscreenable: false,
+    // show: false,
+    title: 'Jump',
+    // transparent: true
   })
 
   mainWindow.loadURL(
@@ -39,12 +43,9 @@ function createWindow () {
   })
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
-
 app.on('ready', () => {
+  createWindow()
+
   electron.globalShortcut.register('CommandOrControl+J', () => {
     if (mainWindow === null) {
       createWindow()
@@ -70,6 +71,3 @@ app.on('activate', function () {
     createWindow()
   }
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.

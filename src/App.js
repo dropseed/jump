@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import opn from 'opn'
+import electron from 'electron'
 import './App.css'
 import Input from 'components/Input'
 import Repositories from 'components/Repositories'
+const constants = require('./constants')
 
 class App extends Component {
   state = {
@@ -41,9 +43,10 @@ class App extends Component {
     event.preventDefault()
     console.log("Opening " + this.state.currentRepository.fullName)
     opn(this.state.currentRepository.htmlUrl)
+    electron.remote.getCurrentWindow().close()
   }
   filterRepositories = (filter) => {
-    let visibleRepositories = this.state.repositories
+    let visibleRepositories = []
     let mostLikely = null
 
     if (filter) {
@@ -51,6 +54,12 @@ class App extends Component {
       if (visibleRepositories) {
         mostLikely = visibleRepositories[0]
       }
+    }
+
+    if (visibleRepositories.length > 0) {
+      electron.remote.getCurrentWindow().setSize(constants.DEFAULT_WINDOW_WIDTH, constants.EXPANDED_WINDOW_HEIGHT)
+    } else {
+      electron.remote.getCurrentWindow().setSize(constants.DEFAULT_WINDOW_WIDTH, constants.DEFAULT_WINDOW_HEIGHT)
     }
 
     this.setState({visibleRepositories: visibleRepositories, currentRepository: mostLikely})
