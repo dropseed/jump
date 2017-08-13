@@ -2,10 +2,7 @@
   "name": "jump",
   "version": "0.1.0",
   "description": "A jump menu for your repositories",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron ."
-  },
+  "private": true,
   "repository": "https://github.com/dropseedlabs/jump",
   "keywords": [
     "jump",
@@ -15,7 +12,29 @@
   ],
   "author": "Dropseed, LLC",
   "license": "AGPL-3.0",
+  "main": "src/main.js",
+  "homepage": "./",
+  "dependencies": {
+    "opn": "^5.1.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.11"
+  },
+  "scripts": {
+    "start": "concurrently 'yarn react-start' 'wait-on http://localhost:3000/ && yarn electron-start'",
+    "build": "yarn react-build && yarn electron-build",
+    "react-start": "BROWSER=none react-scripts start",
+    "react-build": "react-scripts build",
+    "electron-start": "electron .",
+    "electron-build": "electron-packager ./ --overwrite",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
   "devDependencies": {
-    "electron": "~1.6.2"
+    "concurrently": "^3.5.0",
+    "electron": "^1.7.5",
+    "electron-is-dev": "^0.3.0",
+    "electron-packager": "^8.7.2",
+    "wait-on": "^2.0.2"
   }
 }

@@ -1,4 +1,6 @@
 const electron = require('electron')
+const electronIsDev = require('electron-is-dev')
+
 // Module to control application life.
 const app = electron.app
 // Module to create native browser window.
@@ -19,12 +21,11 @@ function createWindow () {
     frame: false
   })
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+  mainWindow.loadURL(
+    electronIsDev
+      ? 'http://localhost:3000' // Dev server ran by react-scripts
+      : `file://${path.join(__dirname, '/build/index.html')}` // Bundled application
+  )
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
