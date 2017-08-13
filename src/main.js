@@ -31,6 +31,7 @@ function createWindow () {
     frame: false,
     skipTaskbar: true,
     fullscreenable: false,
+    resizable: false,
     // show: false,
     title: 'Jump',
     // transparent: true

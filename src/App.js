@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import opn from 'opn'
 import electron from 'electron'
-import './App.css'
 import Input from 'components/Input'
 import Repositories from 'components/Repositories'
 const constants = require('./constants')
@@ -9,6 +8,7 @@ const constants = require('./constants')
 class App extends Component {
   state = {
     currentRepository: null,
+    currentInputValue: "",
     visibleRepositories: [],
     repositories: [
       {
@@ -21,21 +21,22 @@ class App extends Component {
         "fullName": "flinthillsdesign/FlintHillsDesignWP",
         "htmlUrl": "https://github.com/flinthillsdesign/FlintHillsDesignWP"
       }
-    ]
+    ],
   }
   render() {
 
-    const { visibleRepositories, currentRepository, repositories } = this.state
+    const { visibleRepositories, currentRepository, repositories, currentInputValue } = this.state
 
     return (
       <div className="App">
-        <Input onChangeHandler={this.onJumpInputChanged} onSubmitHandler={this.onJumpSubmitted} currentRepository={currentRepository} />
+        <Input value={currentInputValue} onChangeHandler={this.onJumpInputChanged} onSubmitHandler={this.onJumpSubmitted} currentRepository={currentRepository} />
         <Repositories data={visibleRepositories} />
       </div>
     )
   }
   onJumpInputChanged = (event) => {
     const value = event.target.value
+    this.setState({currentInputValue: value})
     console.log("Searching for: " + value)
     this.filterRepositories(value)
   }
