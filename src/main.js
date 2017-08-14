@@ -4,6 +4,8 @@ const constants = require('./constants')
 const utils = require('./utils')
 
 const app = electron.app
+const Tray = electron.Tray
+const Menu = electron.Menu
 const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
@@ -15,6 +17,7 @@ const GitHubApi = require('github')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let tray
 
 function createWindow () {
   const userSettings = utils.getUserSettings()
@@ -67,6 +70,23 @@ function createWindow () {
 app.on('ready', () => {
 
   app.dock.hide()
+
+  tray = new Tray(path.join(__dirname, '../public/menubarTemplate.png'))
+  const contextMenu = Menu.buildFromTemplate([
+    {label: 'Open', type: 'normal', click: (menuItem, browserWindow, event) => {
+      if (mainWindow) {
+        mainWindow.show()
+      } else {
+        createWindow()
+      }
+    }},
+    {type: 'separator'},
+    {label: 'Quit', type: 'normal', click: (menuItem, browserWindow, event) => {
+      app.quit()
+    }}
+  ])
+  tray.setToolTip('jump')
+  tray.setContextMenu(contextMenu)
 
   // TODO use this to send results to
   // const window = createWindow()
