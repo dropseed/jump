@@ -66,6 +66,8 @@ function createWindow () {
 
 app.on('ready', () => {
 
+  app.dock.hide()
+
   // TODO use this to send results to
   // const window = createWindow()
 
