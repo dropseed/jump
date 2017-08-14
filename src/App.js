@@ -8,7 +8,7 @@ const opn = electron.remote.require('opn')
 
 class App extends Component {
   state = {
-    currentRepository: null,
+    currentRepositoryIndex: null,
     currentInputValue: "",
     visibleRepositories: [],
     repositories: [],
@@ -21,22 +21,31 @@ class App extends Component {
       ]
     })
     this.setState({repositories: repos, fuse: fuse})
-    console.log(repos)
 
-    window.addEventListener('keyup', (event) => {
+    window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
         window.close()
+      } else if (event.key === 'ArrowDown' && this.state.visibleRepositories.length > 1) {
+        const currentRepositoryIndex = this.state.currentRepositoryIndex
+        if (currentRepositoryIndex < this.state.visibleRepositories.length - 1) {
+          this.setState({currentRepositoryIndex: currentRepositoryIndex + 1})
+        }
+      } else if (event.key === 'ArrowUp' && this.state.visibleRepositories.length > 1) {
+        const currentRepositoryIndex = this.state.currentRepositoryIndex
+        if (currentRepositoryIndex > 0) {
+          this.setState({currentRepositoryIndex: currentRepositoryIndex - 1})
+        }
       }
     }, true)
   }
   render() {
 
-    const { visibleRepositories, currentRepository, repositories, currentInputValue } = this.state
+    const { visibleRepositories, currentRepositoryIndex, repositories, currentInputValue } = this.state
 
     return (
       <div className="App">
-        <Input value={currentInputValue} onChangeHandler={this.onJumpInputChanged} onSubmitHandler={this.onJumpSubmitted} currentRepository={currentRepository} />
-        <Repositories data={visibleRepositories} />
+        <Input value={currentInputValue} onChangeHandler={this.onJumpInputChanged} onSubmitHandler={this.onJumpSubmitted} />
+        <Repositories data={visibleRepositories} selectedIndex={currentRepositoryIndex} />
       </div>
     )
   }
@@ -47,18 +56,24 @@ class App extends Component {
   }
   onJumpSubmitted = (event) => {
     event.preventDefault()
-    console.log("Opening " + this.state.currentRepository.full_name)
-    opn(this.state.currentRepository.html_url)
+    const { currentRepositoryIndex, visibleRepositories } = this.state
+    if (currentRepositoryIndex === null) {
+      return
+    }
+    const currentRepository = visibleRepositories[currentRepositoryIndex]
+    console.log("Opening " + currentRepository.full_name)
+    opn(currentRepository.html_url)
     electron.remote.getCurrentWindow().close()
   }
   filterRepositories = (filter) => {
     let visibleRepositories = []
-    let mostLikely = null
 
     if (filter) {
       visibleRepositories = this.state.fuse.search(filter)
       if (visibleRepositories) {
-        mostLikely = visibleRepositories[0]
+        this.setState({currentRepositoryIndex: 0})
+      } else {
+        this.setState({currentRepositoryIndex: null})
       }
     }
 
@@ -68,11 +83,11 @@ class App extends Component {
       electron.remote.getCurrentWindow().setSize(constants.DEFAULT_WINDOW_WIDTH, constants.DEFAULT_WINDOW_HEIGHT)
     }
 
-    if (visibleRepositories.length > 10) {
-      visibleRepositories = visibleRepositories.slice(0, 10)
+    if (visibleRepositories.length > 5) {
+      visibleRepositories = visibleRepositories.slice(0, 5)
     }
 
-    this.setState({visibleRepositories: visibleRepositories, currentRepository: mostLikely})
+    this.setState({visibleRepositories: visibleRepositories})
   }
 }
 

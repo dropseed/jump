@@ -3,8 +3,8 @@ import Repository from 'components/Repository'
 
 class Repositories extends Component {
   render() {
-    const { data } = this.props
-    const repositoryItems = data.map(el => <Repository key={el.id} {...el} />)
+    const { data, selectedIndex } = this.props
+    const repositoryItems = data.map((el, index) => <Repository key={el.id} {...el} selected={index ===  selectedIndex} />)
 
     return (
       <div>

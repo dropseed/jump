@@ -3,17 +3,27 @@ import styled from 'styled-components'
 
 class Repository extends Component {
   render() {
-    const { full_name } = this.props
+    const { avatar_url, full_name, selected } = this.props
 
     const Container = styled.div`
-      font-size: 1.25rem;
-      padding: .75rem;
+      font-size: 20px;
+      line-height: 20px;
+      padding: 12px;
       font-weight: 200;
-      border-bottom: 1px solid #e4e4e4;
+      background-color: ${props => props.selected ? "#e4e4e4" : "transparent"};
+    `
+
+    const Img = styled.img`
+      width: 20px;
+      height: 20px;
+      float: left;
+      margin-right: 10px;
+      border-radius: 2px;
     `
 
     return (
-      <Container>
+      <Container selected={selected}>
+        <Img src={avatar_url} />
         {full_name}
       </Container>
     )

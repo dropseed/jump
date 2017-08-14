@@ -114,7 +114,7 @@ app.on('ready', () => {
     global.repos = global.repos.concat(res['data']);
     // remove everything we're not using for better performance
     global.repos = global.repos.map(r => {
-      return {'id': r.id, 'full_name': r.full_name, 'html_url': r.html_url}
+      return {'id': r.id, 'full_name': r.full_name, 'html_url': r.html_url, 'avatar_url': r.avatar_url || r.owner.avatar_url}
     })
 
     if (github.hasNextPage(res)) {

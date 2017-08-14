@@ -7,8 +7,8 @@ const Container = styled.div`
 `
 const FormInput = styled.input`
   width: 100%;
-  padding: .5rem;
-  font-size: 1.8rem;
+  padding: 8px;
+  font-size: 28px;
   &:focus {
     outline: none;
     border: 1px solid #ddd;
@@ -21,12 +21,23 @@ class Input extends Component {
     this.input.focus()
   }
   render() {
-    const { value, full_name, onChangeHandler, onSubmitHandler, currentRepository } = this.props
+    const { value, full_name, onChangeHandler, onSubmitHandler } = this.props
 
     return (
         <Container>
           <form onSubmit={onSubmitHandler}>
-            <FormInput onChange={onChangeHandler} value={value} innerRef={(input) => { this.input = input }} type="text" placeholder="jump to a repo" />
+            <FormInput
+              onChange={onChangeHandler}
+              value={value}
+              innerRef={(input) => { this.input = input }}
+              type="text"
+              placeholder="jump to a repo"
+              onKeyDown={(event) => {
+                if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+                  event.preventDefault()
+                }
+              }}
+            />
           </form>
         </Container>
     )
