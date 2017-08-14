@@ -13,9 +13,9 @@ class Repository extends Component {
     `
 
     return (
-        <Container>
-          {full_name}
-        </Container>
+      <Container>
+        {full_name}
+      </Container>
     )
   }
 }

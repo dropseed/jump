@@ -7,9 +7,9 @@ class Repositories extends Component {
     const repositoryItems = data.map(el => <Repository key={el.id} {...el} />)
 
     return (
-        <div>
-          {repositoryItems}
-        </div>
+      <div>
+        {repositoryItems}
+      </div>
     )
   }
 }

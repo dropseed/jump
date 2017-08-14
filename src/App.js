@@ -22,6 +22,12 @@ class App extends Component {
     })
     this.setState({repositories: repos, fuse: fuse})
     console.log(repos)
+
+    window.addEventListener('keyup', (event) => {
+      if (event.key === 'Escape') {
+        window.close()
+      }
+    }, true)
   }
   render() {
 
@@ -37,7 +43,6 @@ class App extends Component {
   onJumpInputChanged = (event) => {
     const value = event.target.value
     this.setState({currentInputValue: value})
-    console.log("Searching for: " + value)
     this.filterRepositories(value)
   }
   onJumpSubmitted = (event) => {
@@ -63,7 +68,7 @@ class App extends Component {
       electron.remote.getCurrentWindow().setSize(constants.DEFAULT_WINDOW_WIDTH, constants.DEFAULT_WINDOW_HEIGHT)
     }
 
-    if (visibleRepositories.length > 15) {
+    if (visibleRepositories.length > 10) {
       visibleRepositories = visibleRepositories.slice(0, 10)
     }
 

@@ -67,11 +67,8 @@ function createWindow () {
   return mainWindow
 }
 
-app.on('ready', () => {
-
-  app.dock.hide()
-
-  tray = new Tray(path.join(__dirname, '../public/menubarTemplate.png'))
+function createTray() {
+  tray = new Tray(path.join(__dirname, electronIsDev ? '../public/menubarTemplate.png' : '../build/menubarTemplate.png'))
   const contextMenu = Menu.buildFromTemplate([
     {label: 'Open', type: 'normal', click: (menuItem, browserWindow, event) => {
       if (mainWindow) {
@@ -87,9 +84,13 @@ app.on('ready', () => {
   ])
   tray.setToolTip('jump')
   tray.setContextMenu(contextMenu)
+}
 
-  // TODO use this to send results to
-  // const window = createWindow()
+app.on('ready', () => {
+
+  app.dock.hide()
+
+  createTray()
 
   const github = new GitHubApi({
     headers: {
@@ -113,7 +114,7 @@ app.on('ready', () => {
     global.repos = global.repos.concat(res['data']);
     // remove everything we're not using for better performance
     global.repos = global.repos.map(r => {
-      return {'full_name': r.full_name, 'html_url': r.html_url}
+      return {'id': r.id, 'full_name': r.full_name, 'html_url': r.html_url}
     })
 
     if (github.hasNextPage(res)) {
@@ -124,8 +125,6 @@ app.on('ready', () => {
       createWindow()
     }
   }
-
-  // createWindow()
 })
 
 // Quit when all windows are closed.
