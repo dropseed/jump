@@ -16,8 +16,10 @@ class App extends Component {
   componentDidMount() {
     const repos = electron.remote.getGlobal('repos')
     const fuse = new Fuse(repos, {
+      shouldSort: true,
+      threshold: 0.4,
       keys: [
-        "full_name"
+        "name"
       ]
     })
     this.setState({repositories: repos, fuse: fuse})
