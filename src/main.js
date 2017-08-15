@@ -25,8 +25,12 @@ function createWindow () {
     return
   }
 
+  const currentDisplay = electron.screen.getDisplayNearestPoint(electron.screen.getCursorScreenPoint())
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    x: currentDisplay.bounds.x,
+    y: currentDisplay.bounds.y,
     width: constants.DEFAULT_WINDOW_WIDTH,
     height: constants.DEFAULT_WINDOW_HEIGHT,
     frame: false,
@@ -40,6 +44,8 @@ function createWindow () {
     //   webSecurity: false
     // }
   })
+
+  mainWindow.center()
 
   mainWindow.loadURL(
     electronIsDev
