@@ -1,0 +1,20 @@
+dist: trusty
+sudo: required
+language: node_js
+node_js:
+  - "7"
+os:
+  - osx
+  # - linux
+# addons:
+#   apt:
+#     packages:
+#     - rpm
+script:
+  - echo "No tests"
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: yarn install && electron-forge publish --tag=$TRAVIS_TAG
+  on:
+    tags: true
