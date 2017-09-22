@@ -29,7 +29,8 @@
                 ]
             },
             "electronPackagerConfig": {
-                "packageManager": "yarn"
+                "packageManager": "yarn",
+                "icon": "src/icon.icns"
             },
             "electronWinstallerConfig": {
                 "name": "jump"
