@@ -2,6 +2,9 @@ import GitHubApi from 'github'
 import { getUserSettings } from './utils'
 
 export const loadUserRepos = (callback) => {
+    const userSettings = getUserSettings()
+    if (!userSettings) return
+
     const github = new GitHubApi({
       headers: {
         "user-agent": "jump" // GitHub is happy with a unique user agent
@@ -10,7 +13,7 @@ export const loadUserRepos = (callback) => {
 
     github.authenticate({
       type: "token",
-      token: getUserSettings().config.github_access_token,
+      token: userSettings.config.github_access_token,
     })
 
     global.repos = []
