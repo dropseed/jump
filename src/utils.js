@@ -1,17 +1,15 @@
-const electron = require('electron')
-const path = require('path')
-const os = require('os')
+import electron from 'electron'
+import path from 'path'
+import os from 'os'
+import fs from 'fs'
 
-function getUserSettings() {
+export const getUserSettings = () => {
+  const configFilePath = path.join(os.homedir(), '.jump.json')
   try {
-    return require(path.join(os.homedir(), '.jump.js'))
+    return JSON.parse(fs.readFileSync(configFilePath))
   } catch (e) {
     console.log(e)
-    electron.dialog.showErrorBox('No config found', 'You need a ~/.jump.js config file.')
+    electron.dialog.showErrorBox('No config found', 'You need a ~/.jump.json config file.')
     return
   }
-}
-
-module.exports = {
-  getUserSettings: getUserSettings
 }

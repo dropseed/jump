@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Fuse from 'fuse.js'
 import electron from 'electron'
-import Input from 'components/Input'
-import Repositories from 'components/Repositories'
+import Input from './components/Input'
+import Repositories from './components/Repositories'
 const constants = require('./constants')
 const opn = electron.remote.require('opn')
 

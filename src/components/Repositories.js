@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Repository from 'components/Repository'
+import Repository from './Repository'
 
 class Repositories extends Component {
   render() {
