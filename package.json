@@ -13,7 +13,7 @@
     },
     "keywords": [],
     "author": "davegaeddert",
-    "license": "MIT",
+    "license": "AGPL-3.0",
     "config": {
         "forge": {
             "make_targets": {
