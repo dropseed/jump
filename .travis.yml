@@ -15,6 +15,6 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  script: yarn install && electron-forge publish --tag=$TRAVIS_TAG
+  script: yarn run publish
   on:
     tags: true
