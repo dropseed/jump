@@ -32,9 +32,13 @@
     vue-template-compiler "^2.0.0-alpha.8"
     vue-template-es2015-compiler "^1.4.2"
 
-"@types/node@^7.0.12", "@types/node@^7.0.18":
+"@types/node@^7.0.12":
   version "7.0.43"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.43.tgz#a187e08495a075f200ca946079c914e1a5fe962c"
+
+"@types/node@^8.0.24":
+  version "8.0.31"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.31.tgz#d9af61093cf4bfc9f066ca34de0175012cfb0ce9"
 
 abab@^1.0.0:
   version "1.0.3"
@@ -1860,15 +1864,15 @@ electron-packager@^9.0.0:
     sanitize-filename "^1.6.0"
     semver "^5.3.0"
 
-electron-prebuilt-compile@1.7.6:
-  version "1.7.6"
-  resolved "https://registry.yarnpkg.com/electron-prebuilt-compile/-/electron-prebuilt-compile-1.7.6.tgz#2f59151839fa29b081e81e469d57fac4cc3c613b"
+electron-prebuilt-compile@1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/electron-prebuilt-compile/-/electron-prebuilt-compile-1.8.1.tgz#8abca77d8f3262afdb535c36be93874bdbca6a0a"
   dependencies:
     babel-plugin-array-includes "^2.0.3"
     babel-plugin-transform-async-to-generator "^6.8.0"
     babel-preset-es2016-node5 "^1.1.2"
     babel-preset-react "^6.11.1"
-    electron "1.7.6"
+    electron "1.8.1"
     electron-compile "*"
     electron-compilers "*"
     yargs "^6.6.0"
@@ -1917,11 +1921,11 @@ electron-winstaller@^2.5.0:
     lodash.template "^4.2.2"
     temp "^0.8.3"
 
-electron@1.7.6:
-  version "1.7.6"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.7.6.tgz#fb69ea31bd03df0eff247f26f0b538bd29b6ee72"
+electron@1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.1.tgz#19b6f39f2013e204a91a60bc3086dc7a4a07ed88"
   dependencies:
-    "@types/node" "^7.0.18"
+    "@types/node" "^8.0.24"
     electron-download "^3.0.1"
     extract-zip "^1.0.3"
 
