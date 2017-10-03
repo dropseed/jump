@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Fuse from 'fuse.js'
+import { filter } from 'fuzzaldrin'
 import electron from 'electron'
 import Input from './components/Input'
 import Repositories from './components/Repositories'
@@ -15,14 +15,7 @@ class App extends Component {
   }
   componentDidMount() {
     const repos = electron.remote.getGlobal('repos')
-    const fuse = new Fuse(repos, {
-      shouldSort: true,
-      threshold: 0.4,
-      keys: [
-        "name"
-      ]
-    })
-    this.setState({repositories: repos, fuse: fuse})
+    this.setState({repositories: repos})
 
     window.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') {
@@ -67,11 +60,11 @@ class App extends Component {
     opn(currentRepository.html_url)
     electron.remote.getCurrentWindow().close()
   }
-  filterRepositories = (filter) => {
+  filterRepositories = (filterString) => {
     let visibleRepositories = []
 
-    if (filter) {
-      visibleRepositories = this.state.fuse.search(filter)
+    if (filterString) {
+      visibleRepositories = filter(this.state.repositories, filterString, {key: 'name', maxResults: 5})
       if (visibleRepositories) {
         this.setState({currentRepositoryIndex: 0})
       } else {
