@@ -2,7 +2,7 @@
     "name": "jump",
     "productName": "jump",
     "version": "0.3.0",
-    "description": "My Electron application description",
+    "description": "A fast way to open your GitHub repos.",
     "main": "src/index.js",
     "scripts": {
         "start": "electron-forge start",
