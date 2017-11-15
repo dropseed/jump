@@ -1,7 +1,7 @@
 {
     "name": "jump",
     "productName": "jump",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "A fast way to open your GitHub repos.",
     "main": "src/index.js",
     "scripts": {
