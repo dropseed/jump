@@ -2411,9 +2411,9 @@ github@^11.0.0:
     mime "^1.2.11"
     netrc "^0.1.4"
 
-github@^12.0.1:
-  version "12.0.2"
-  resolved "https://registry.yarnpkg.com/github/-/github-12.0.2.tgz#3ab9a67a35ab771cf1a6c1d1f28793509d5e13eb"
+github@^12.0.3:
+  version "12.0.3"
+  resolved "https://registry.yarnpkg.com/github/-/github-12.0.3.tgz#e54b0917606e09c8bb6777cd5f22b257bf5c79b5"
   dependencies:
     dotenv "^4.0.0"
     follow-redirects "1.2.5"
@@ -3045,6 +3045,7 @@ jade@^1.11.0:
     jstransformer "0.0.2"
     mkdirp "~0.5.0"
     transformers "2.1.0"
+    uglify-js "^2.4.19"
     void-elements "~2.0.1"
     with "~4.0.0"
 
