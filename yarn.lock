@@ -2218,12 +2218,6 @@ follow-redirects@0.0.7:
     debug "^2.2.0"
     stream-consume "^0.1.0"
 
-follow-redirects@1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.2.6.tgz#4dcdc7e4ab3dd6765a97ff89c3b4c258117c79bf"
-  dependencies:
-    debug "^3.1.0"
-
 forever-agent@~0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
@@ -2411,16 +2405,16 @@ github@^11.0.0:
     mime "^1.2.11"
     netrc "^0.1.4"
 
-github@^12.0.6:
-  version "12.0.6"
-  resolved "https://registry.yarnpkg.com/github/-/github-12.0.6.tgz#5f951307acc696e41da4ada1e88341cfbc3ae921"
+github@^13.0.1:
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/github/-/github-13.0.1.tgz#4ccf4a41df662f92367e77a474674eabb1b6c78d"
   dependencies:
+    debug "^3.1.0"
     dotenv "^4.0.0"
-    follow-redirects "1.2.6"
     https-proxy-agent "^2.1.0"
     lodash "^4.17.4"
-    mime "^2.0.3"
-    netrc "^0.1.4"
+    proxy-from-env "^1.0.0"
+    url-template "^2.0.8"
 
 glob@7.0.x:
   version "7.0.6"
@@ -3432,10 +3426,6 @@ mime@^1.2.11:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.4.1.tgz#121f9ebc49e3766f311a76e1fa1c8003c4b03aa6"
 
-mime@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-2.0.3.tgz#4353337854747c48ea498330dc034f9f4bbbcc0b"
-
 mime@~1.2.11:
   version "1.2.11"
   resolved "https://registry.yarnpkg.com/mime/-/mime-1.2.11.tgz#58203eed86e3a5ef17aed2b7d9ebd47f0a60dd10"
@@ -4206,6 +4196,10 @@ property-is-enumerable-x@^1.1.0:
   dependencies:
     to-object-x "^1.4.1"
     to-property-key-x "^2.0.1"
+
+proxy-from-env@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.0.0.tgz#33c50398f70ea7eb96d21f7b817630a55791c7ee"
 
 prr@~0.0.0:
   version "0.0.0"
@@ -5330,6 +5324,10 @@ universalify@^0.1.0:
 unorm@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/unorm/-/unorm-1.4.1.tgz#364200d5f13646ca8bcd44490271335614792300"
+
+url-template@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/url-template/-/url-template-2.0.8.tgz#fc565a3cccbff7730c775f5641f9555791439f21"
 
 url@0.10.3:
   version "0.10.3"
