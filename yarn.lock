@@ -2411,9 +2411,9 @@ github@^11.0.0:
     mime "^1.2.11"
     netrc "^0.1.4"
 
-github@^12.0.6:
-  version "12.0.6"
-  resolved "https://registry.yarnpkg.com/github/-/github-12.0.6.tgz#5f951307acc696e41da4ada1e88341cfbc3ae921"
+github@^12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/github/-/github-12.1.0.tgz#f2a2dcbd441178155942257491a4bc08bf661dd7"
   dependencies:
     dotenv "^4.0.0"
     follow-redirects "1.2.6"
