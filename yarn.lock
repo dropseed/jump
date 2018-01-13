@@ -1773,9 +1773,9 @@ electron-forge-template-vue@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/electron-forge-template-vue/-/electron-forge-template-vue-1.0.3.tgz#58a11ec972a0f0518e1306da7a573fbaf6b4ac50"
 
-electron-forge@^4.1.6:
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/electron-forge/-/electron-forge-4.1.6.tgz#99003d54e07816278ebc48b43bc785e3ff19fbbe"
+electron-forge@^4.1.7:
+  version "4.1.7"
+  resolved "https://registry.yarnpkg.com/electron-forge/-/electron-forge-4.1.7.tgz#b06526dca8848af72f9493e46357753a15006238"
   dependencies:
     aws-sdk "^2.9.0"
     babel-register "^6.16.3"
