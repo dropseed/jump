@@ -6,6 +6,20 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/7zip/-/7zip-0.0.6.tgz#9cafb171af82329490353b4816f03347aa150a30"
 
+"@octokit/rest@^14.0.4":
+  version "14.0.8"
+  resolved "https://registry.yarnpkg.com/@octokit/rest/-/rest-14.0.8.tgz#594292f9c30eb86a832f99f7d464ee7c9c8114c5"
+  dependencies:
+    before-after-hook "^1.1.0"
+    debug "^3.1.0"
+    dotenv "^4.0.0"
+    https-proxy-agent "^2.1.0"
+    is-array-buffer "^1.0.0"
+    is-stream "^1.1.0"
+    lodash "^4.17.4"
+    proxy-from-env "^1.0.0"
+    url-template "^2.0.8"
+
 "@paulcbetts/mime-db@~1.22.0":
   version "1.22.4"
   resolved "https://registry.yarnpkg.com/@paulcbetts/mime-db/-/mime-db-1.22.4.tgz#b8ff8e78087a40992990f702f8d9c65499be2ef1"
@@ -267,7 +281,7 @@ async@1.x, async@^1.4.0, async@^1.4.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
-async@^2.0.0, async@^2.1.5, async@^2.5.0:
+async@^2.0.0, async@^2.1.5:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
   dependencies:
@@ -920,6 +934,10 @@ bcrypt-pbkdf@^1.0.0:
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
   dependencies:
     tweetnacl "^0.14.3"
+
+before-after-hook@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/before-after-hook/-/before-after-hook-1.1.0.tgz#83165e15a59460d13702cb8febd6a1807896db5a"
 
 binary@^0.3.0:
   version "0.3.0"
@@ -1773,10 +1791,11 @@ electron-forge-template-vue@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/electron-forge-template-vue/-/electron-forge-template-vue-1.0.3.tgz#58a11ec972a0f0518e1306da7a573fbaf6b4ac50"
 
-electron-forge@^4.1.7:
-  version "4.1.7"
-  resolved "https://registry.yarnpkg.com/electron-forge/-/electron-forge-4.1.7.tgz#b06526dca8848af72f9493e46357753a15006238"
+electron-forge@^4.1.8:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/electron-forge/-/electron-forge-4.3.0.tgz#e44f0a558b6471a700af77d3413543100528f0dc"
   dependencies:
+    "@octokit/rest" "^14.0.4"
     aws-sdk "^2.9.0"
     babel-register "^6.16.3"
     bluebird "^3.4.6"
@@ -1791,13 +1810,13 @@ electron-forge@^4.1.7:
     electron-packager "^10.1.0"
     electron-rebuild "^1.6.0"
     form-data "^2.1.4"
-    fs-extra "^4.0.0"
-    github "^12.0.3"
+    fs-extra "^5.0.0"
     glob "^7.1.1"
-    inquirer "^4.0.0"
+    inquirer "^5.0.0"
     lodash.merge "^4.6.0"
     lodash.template "^4.4.0"
     log-symbols "^2.0.0"
+    mime-types "^2.1.17"
     node-fetch "^1.6.3"
     node-gyp "^3.4.0"
     nugget "^2.0.1"
@@ -1814,25 +1833,28 @@ electron-forge@^4.1.7:
     yarn-or-npm "^2.0.2"
     zip-folder "^1.0.0"
   optionalDependencies:
-    electron-installer-debian "^0.7.1"
+    electron-installer-debian "^0.8.0"
     electron-installer-dmg "^0.2.0"
-    electron-installer-flatpak "^0.6.0"
+    electron-installer-flatpak "^0.8.0"
     electron-installer-redhat "^0.5.0"
     electron-windows-store "^0.12.0"
     electron-winstaller "^2.5.0"
+    electron-wix-msi "^1.3.0"
 
-electron-installer-debian@^0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/electron-installer-debian/-/electron-installer-debian-0.7.1.tgz#a09f8345861fe924e25a714d4af2e89c428b22b7"
+electron-installer-debian@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/electron-installer-debian/-/electron-installer-debian-0.8.0.tgz#155a597e17ec1f0b3a7004e2fea8919bb5a9703a"
   dependencies:
     asar "^0.14.0"
-    async "^2.5.0"
+    cross-spawn-promise "^0.10.1"
     debug "^3.1.0"
     fs-extra "^4.0.2"
     get-folder-size "^1.0.0"
     glob "^7.1.2"
     lodash "^4.17.4"
     mkdirp "^0.5.1"
+    nodeify "^1.0.1"
+    pify "^3.0.0"
     semver "^5.4.1"
     temp "^0.8.3"
     word-wrap "^1.2.3"
@@ -1847,9 +1869,9 @@ electron-installer-dmg@^0.2.0:
   optionalDependencies:
     appdmg "^0.4.5"
 
-electron-installer-flatpak@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/electron-installer-flatpak/-/electron-installer-flatpak-0.6.0.tgz#dae659345c8affd74188d7c6236efda2484f2657"
+electron-installer-flatpak@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/electron-installer-flatpak/-/electron-installer-flatpak-0.8.0.tgz#8edd178e0e04ec2da0fa40e777b67c9ccb78775f"
   dependencies:
     asar "^0.12.0"
     async "^2.0.0"
@@ -1965,6 +1987,16 @@ electron-winstaller@^2.5.0:
     fs-extra "^0.26.7"
     lodash.template "^4.2.2"
     temp "^0.8.3"
+
+electron-wix-msi@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/electron-wix-msi/-/electron-wix-msi-1.3.0.tgz#158f70778077463eb04c15bc8df136df3e0706ec"
+  dependencies:
+    debug "^3.1.0"
+    fs-extra "^4.0.2"
+    klaw "^2.1.0"
+    lodash "^4.17.4"
+    uuid "^3.1.0"
 
 electron@1.8.1:
   version "1.8.1"
@@ -2313,6 +2345,14 @@ fs-extra@^4.0.2:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
+fs-extra@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-5.0.0.tgz#414d0110cdd06705734d055652c5411260c31abd"
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-temp@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/fs-temp/-/fs-temp-1.1.2.tgz#cc52f038bbefe510f6bcd09ec592b79d0f69253f"
@@ -2419,17 +2459,6 @@ getpass@^0.1.1:
   resolved "https://registry.yarnpkg.com/getpass/-/getpass-0.1.7.tgz#5eff8e3e684d569ae4cb2b1282604e8ba62149fa"
   dependencies:
     assert-plus "^1.0.0"
-
-github@^12.0.3:
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/github/-/github-12.1.0.tgz#f2a2dcbd441178155942257491a4bc08bf661dd7"
-  dependencies:
-    dotenv "^4.0.0"
-    follow-redirects "1.2.6"
-    https-proxy-agent "^2.1.0"
-    lodash "^4.17.4"
-    mime "^2.0.3"
-    netrc "^0.1.4"
 
 github@^12.0.6:
   version "12.0.6"
@@ -2803,9 +2832,9 @@ inquirer@^3.2.3:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-inquirer@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-4.0.1.tgz#b25cd541789394b4bb56f6440fb213b121149096"
+inquirer@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-5.0.1.tgz#5c0396c974fd98df4cab9afd26ed85874b563550"
   dependencies:
     ansi-escapes "^3.0.0"
     chalk "^2.0.0"
@@ -2816,8 +2845,7 @@ inquirer@^4.0.0:
     lodash "^4.3.0"
     mute-stream "0.0.7"
     run-async "^2.2.0"
-    rx-lite "^4.0.8"
-    rx-lite-aggregates "^4.0.8"
+    rxjs "^5.5.2"
     string-width "^2.1.0"
     strip-ansi "^4.0.0"
     through "^2.3.6"
@@ -2845,6 +2873,10 @@ is-array-buffer-x@^1.0.13:
     is-object-like-x "^1.5.1"
     object-get-own-property-descriptor-x "^3.2.0"
     to-string-tag-x "^1.4.1"
+
+is-array-buffer@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/is-array-buffer/-/is-array-buffer-1.0.0.tgz#f32497a0509d109423f472003f98bab6a8ea34cb"
 
 is-arrayish@^0.2.1:
   version "0.2.1"
@@ -3218,6 +3250,12 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
+klaw@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/klaw/-/klaw-2.1.1.tgz#42b76894701169cc910fd0d19ce677b5fb378af1"
+  dependencies:
+    graceful-fs "^4.1.9"
+
 lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
@@ -3449,7 +3487,7 @@ mime-db@~1.30.0:
   version "1.30.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
 
-mime-types@^2.1.12, mime-types@~2.1.17, mime-types@~2.1.7:
+mime-types@^2.1.12, mime-types@^2.1.17, mime-types@~2.1.17, mime-types@~2.1.7:
   version "2.1.17"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.17.tgz#09d7a393f03e995a79f8af857b70a9e0ab16557a"
   dependencies:
@@ -4263,6 +4301,10 @@ property-is-enumerable-x@^1.1.0:
     to-object-x "^1.4.1"
     to-property-key-x "^2.0.1"
 
+proxy-from-env@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.0.0.tgz#33c50398f70ea7eb96d21f7b817630a55791c7ee"
+
 prr@~0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/prr/-/prr-0.0.0.tgz#1a84b85908325501411853d0081ee3fa86e2926a"
@@ -4667,6 +4709,12 @@ rxjs@^5.1.1:
   dependencies:
     symbol-observable "^1.0.1"
 
+rxjs@^5.5.2:
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.6.tgz#e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02"
+  dependencies:
+    symbol-observable "1.0.1"
+
 s3@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/s3/-/s3-4.4.0.tgz#56a4f775515a7b6b9c8e5c6b1ab51f9037669f1f"
@@ -5062,6 +5110,10 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
+symbol-observable@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
+
 symbol-observable@^1.0.1:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.4.tgz#29bf615d4aa7121bdd898b22d4b3f9bc4e2aa03d"
@@ -5385,6 +5437,10 @@ universalify@^0.1.0:
 unorm@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/unorm/-/unorm-1.4.1.tgz#364200d5f13646ca8bcd44490271335614792300"
+
+url-template@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/url-template/-/url-template-2.0.8.tgz#fc565a3cccbff7730c775f5641f9555791439f21"
 
 url@0.10.3:
   version "0.10.3"
