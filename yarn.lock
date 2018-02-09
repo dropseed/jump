@@ -1909,15 +1909,15 @@ electron-packager@^10.1.0:
     semver "^5.3.0"
     yargs-parser "^8.0.0"
 
-electron-prebuilt-compile@1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/electron-prebuilt-compile/-/electron-prebuilt-compile-1.8.1.tgz#8abca77d8f3262afdb535c36be93874bdbca6a0a"
+electron-prebuilt-compile@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/electron-prebuilt-compile/-/electron-prebuilt-compile-1.8.2.tgz#e7fc755759e5c638d5a0ac4832effb52e5016c87"
   dependencies:
     babel-plugin-array-includes "^2.0.3"
     babel-plugin-transform-async-to-generator "^6.8.0"
     babel-preset-es2016-node5 "^1.1.2"
     babel-preset-react "^6.11.1"
-    electron "1.8.1"
+    electron "1.8.2"
     electron-compile "*"
     electron-compilers "*"
     yargs "^6.6.0"
@@ -1966,9 +1966,9 @@ electron-winstaller@^2.5.0:
     lodash.template "^4.2.2"
     temp "^0.8.3"
 
-electron@1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.1.tgz#19b6f39f2013e204a91a60bc3086dc7a4a07ed88"
+electron@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-1.8.2.tgz#a817cd733c2972b3c7cc4f777caf6e424b88014d"
   dependencies:
     "@types/node" "^8.0.24"
     electron-download "^3.0.1"
