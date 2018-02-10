@@ -1,3 +1,6 @@
 version: 2
 collectors:
 - type: js-npm
+  manifest_updates:
+    settings:
+      constraint_prefix: '^'
