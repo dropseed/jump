@@ -25,4 +25,4 @@ You need a `~/.jump.json` config file that looks like this:
 
 - `github_access_token` is required and should be a [personal access token that you create](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/#creating-a-token)
 - `globalShortcut` is an optional [shortcut](https://electronjs.org/docs/api/global-shortcut) that you can provide to open jump (`CommandOrControl+J` by default)
-- `host` and `pathPrefix` must be set when using Github Enterprise
+- `githubEnterprise.host` and `githubEnterprise.pathPrefix` must be set when using Github Enterprise
