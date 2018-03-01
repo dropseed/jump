@@ -15,8 +15,10 @@ You need a `~/.jump.json` config file that looks like this:
   "config": {
     "github_access_token": "youraccesstokenhere",
     "globalShortcut": "Command+J",
-    "host": "optional",
-    "pathPrefix": "optional"    
+    "githubEnterprise": {
+      "host": "optional",
+      "pathPrefix": "optional"
+    }
   }
 }
 ```
