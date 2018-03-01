@@ -5,15 +5,20 @@ export const loadUserRepos = (callback) => {
     const userSettings = getUserSettings()
     if (!userSettings) return
 
-    const github = new GitHubApi({
+    const { config = {} } = userSettings
+    const { github_access_token: token = '', githubEnterprise = {} } = config
+
+    const apiParameters = {
       headers: {
         "user-agent": "jump" // GitHub is happy with a unique user agent
       },
-    })
+    }
+
+    const github = new GitHubApi(Object.assign(apiParameters, githubEnterprise))
 
     github.authenticate({
       type: "token",
-      token: userSettings.config.github_access_token,
+      token,
     })
 
     global.repos = []
