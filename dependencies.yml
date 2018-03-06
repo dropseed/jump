@@ -1,5 +1,5 @@
 version: 2
-collectors:
+dependencies:
 - type: js
   settings:
     constraint_prefix: '^'
