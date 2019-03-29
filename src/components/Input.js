@@ -17,8 +17,7 @@ const FormInput = styled.input`
 
 class Input extends Component {
   componentDidMount() {
-    // if (this.input !== document.activeElement) this.input.focus()
-    this.input.focus()
+    this.inputRef.focus()
   }
   render() {
     const { value, full_name, onChangeHandler, onSubmitHandler } = this.props
@@ -29,7 +28,7 @@ class Input extends Component {
             <FormInput
               onChange={onChangeHandler}
               value={value}
-              innerRef={(input) => { this.input = input }}
+              ref={(input) => { this.inputRef = input }}
               type="text"
               placeholder="jump to a repo"
               onKeyDown={(event) => {

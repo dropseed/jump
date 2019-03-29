@@ -1,4 +1,4 @@
-import GitHubApi from 'github'
+import GitHubApi from '@octokit/rest'
 import { getUserSettings } from './utils'
 
 export const loadUserRepos = (callback) => {
