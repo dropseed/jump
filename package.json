@@ -48,10 +48,10 @@
         }
     },
     "dependencies": {
+        "@octokit/rest": "^14.0.0",
         "electron-compile": "^6.4.2",
         "electron-devtools-installer": "^2.2.3",
         "fuzzaldrin": "^2.1.0",
-        "@octokit/rest": "^14.0.0",
         "opn": "^5.1.0",
         "react": "^16.1.1",
         "react-dom": "^16.1.1",
