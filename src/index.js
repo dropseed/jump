@@ -42,16 +42,19 @@ function createWindow() {
     // webPreferences: {
     //   webSecurity: false
     // }
+    webPreferences: {
+      nodeIntegration: true
+    }
   })
 
   mainWindow.center()
-  // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  // mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadFile(`${__dirname}/index.html`)
 
   // Open the DevTools.
   if (isDevMode) {
     installExtension(REACT_DEVELOPER_TOOLS)
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
   }
 
   // Emitted when the window is closed.
@@ -95,28 +98,20 @@ function createTray() {
   tray.setContextMenu(contextMenu)
 }
 
-app.on('ready', () => {
+app.whenReady().then(() => {
   app.dock.hide()
   createTray()
   loadUserRepos(createWindow)
 })
 
-// Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
 app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (mainWindow === null) {
+  if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
 })
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
