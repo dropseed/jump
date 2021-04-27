@@ -1,70 +1,91 @@
 {
-    "name": "jump",
-    "productName": "jump",
-    "version": "0.4.4",
-    "description": "A fast way to open your GitHub repos.",
-    "main": "src/index.js",
-    "scripts": {
-        "start": "electron-forge start",
-        "package": "electron-forge package",
-        "make": "electron-forge make",
-        "publish": "electron-forge publish",
-        "lint": "echo \"No linting configured\""
-    },
-    "keywords": [],
-    "author": "davegaeddert",
-    "license": "AGPL-3.0",
-    "config": {
-        "forge": {
-            "make_targets": {
-                "win32": [
-                    "squirrel"
-                ],
-                "darwin": [
-                    "zip"
-                ],
-                "linux": [
-                    "deb",
-                    "rpm"
-                ]
-            },
-            "electronPackagerConfig": {
-                "packageManager": "yarn",
-                "icon": "src/icon.icns"
-            },
-            "electronWinstallerConfig": {
-                "name": "jump"
-            },
-            "electronInstallerDebian": {},
-            "electronInstallerRedhat": {},
-            "github_repository": {
-                "owner": "dropseed",
-                "name": "jump"
-            },
-            "windowsStoreConfig": {
-                "packageName": "",
-                "name": "jump"
-            }
+  "name": "jump",
+  "productName": "jump",
+  "version": "0.4.4",
+  "description": "A fast way to open your GitHub repos.",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "Dave Gaeddert",
+    "email": "dave.gaeddert@dropseed.io"
+  },
+  "license": "AGPL-3.0",
+  "type": "module",
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "jump"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
         }
-    },
-    "dependencies": {
-        "@octokit/rest": "^14.0.0",
-        "electron-compile": "^6.4.2",
-        "electron-devtools-installer": "^3.1.1",
-        "fuzzaldrin": "^2.1.0",
-        "opn": "^6.0.0",
-        "react": "^17.0.1",
-        "react-dom": "^17.0.1",
-        "react-hot-loader": "^4.0.0",
-        "styled-components": "^5.2.1"
-    },
-    "devDependencies": {
-        "babel-plugin-transform-async-to-generator": "^6.24.1",
-        "babel-plugin-transform-class-properties": "^6.24.1",
-        "babel-plugin-transform-es2015-classes": "^6.24.1",
-        "babel-preset-env": "^1.6.1",
-        "babel-preset-react": "^6.24.1",
-        "electron-forge": "^5.1.1",
-        "electron-prebuilt-compile": "8.2.0"
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/index.html",
+                  "js": "./src/renderer.js",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
     }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/preset-react": "^7.12.13",
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.54",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^4.2.1",
+    "electron": "11.2.3",
+    "node-loader": "^1.0.1",
+    "style-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "@octokit/rest": "^14.0.0",
+    "fuzzaldrin": "^2.1.0",
+    "opn": "^6.0.0",
+    "styled-components": "^5.2.1"
+  }
 }
